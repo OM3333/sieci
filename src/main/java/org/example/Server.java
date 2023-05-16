@@ -34,6 +34,15 @@ public class Server {
         }
     }
 
+
+    public ClientThread getClient(String login){
+        for(ClientThread client : clients){
+            if(client.getLogin().equals(login)){
+                return client;
+            }
+        }
+        return null;
+    }
     public void broadCastMessage(Message message, ClientThread sender){
         for(ClientThread client : clients){
             if(!client.equals(sender)){

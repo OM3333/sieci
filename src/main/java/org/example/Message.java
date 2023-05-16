@@ -26,4 +26,13 @@ public class Message {
         return objectMapper.writeValueAsString(this);
     }
 
+    @Override
+    public String toString(){
+        try {
+            return toJson();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
