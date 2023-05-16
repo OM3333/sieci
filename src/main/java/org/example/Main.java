@@ -1,8 +1,16 @@
 package org.example;
 
+import org.example.Server;
+
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Server server = new Server(5000);
+        try {
+            server.listen();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
 }
