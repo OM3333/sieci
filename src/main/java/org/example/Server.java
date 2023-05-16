@@ -18,12 +18,27 @@ public class Server {
         }
     }
 
+    public void addUser() throws IOException {
+        Socket socket = serverSocket.accept();
+        ClientThread thread = new ClientThread(socket, this);
+        clients.add(thread);
+        thread.start();
+    }
+
     public void listen() throws IOException {
         while(true) {
-            Socket socket = serverSocket.accept();
-            ClientThread thread = new ClientThread(socket);
-            clients.add(thread);
-            thread.start();
+            addUser();
+            addUser();
+
+
+        }
+    }
+
+    public void broadCastMessage(Message message, ClientThread sender){
+        for(ClientThread client : clients){
+            if(!client.equals(sender)){
+                client.sendMessage(message);
+            }
         }
     }
 }
